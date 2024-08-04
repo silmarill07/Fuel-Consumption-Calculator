@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Заметки</div>
+        <div class="menu">
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <div class="menu-content" id="menu">
+                <span class="close-menu" onclick="toggleMenu()">✖</span>
+                <!-- Menu items here -->
+            </div>
+        </div>
+    </header>
+
+    <div id="mainContainer">
+        <div id="notesContainer"></div>
+        <button class="add-note-btn" onclick="openAddNotePage()">+</button>
+    </div>
+
+    <!-- Add Note Page -->
+    <div id="addNotePage" class="add-note-container" style="display: none;">
+        <header class="header">
+            <div class="back-button" onclick="closeAddNotePage()">←</div>
+            <div class="save-button" onclick="saveNote()">✔</div>
+        </header>
+        <input type="text" id="noteTitle" placeholder="Название заметки">
+        <textarea id="noteContent" placeholder="Содержимое заметки"></textarea>
+    </div>
+
+    <!-- View Note Page -->
+    <div id="viewNotePage" class="view-note-container" style="display: none;">
+        <header class="header">
+            <div class="back-button" onclick="closeViewNote()">←</div>
+            <div class="save-button" onclick="updateNote()">✔</div>
+        </header>
+        <input type="text" id="viewNoteTitle" placeholder="Название заметки">
+        <textarea id="viewNoteContent" placeholder="Содержимое заметки"></textarea>
+        <button class="delete-button" onclick="deleteNote()">Удалить</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
