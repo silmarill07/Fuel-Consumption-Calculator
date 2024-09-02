@@ -11,10 +11,6 @@
         <div class="logo">Заметки</div>
         <div class="menu">
             <div class="menu-icon" onclick="toggleMenu()">☰</div>
-            <div class="menu-content" id="menu">
-                <span class="close-menu" onclick="toggleMenu()">✖</span>
-                <!-- Menu items here -->
-            </div>
         </div>
     </header>
 
@@ -36,12 +32,51 @@
     <!-- View Note Page -->
     <div id="viewNotePage" class="view-note-container" style="display: none;">
         <header class="header">
-            <div class="back-button" onclick="closeViewNote()">←</div>
+            <div class="back-button" onclick="closeViewNotePage()">←</div>
             <div class="save-button" onclick="updateNote()">✔</div>
         </header>
         <input type="text" id="viewNoteTitle" placeholder="Название заметки">
         <textarea id="viewNoteContent" placeholder="Содержимое заметки"></textarea>
         <button class="delete-button" onclick="deleteNote()">Удалить</button>
+    </div>
+
+    <!-- Menu -->
+    <div id="menu" class="menu-content" style="display: none;">
+        <div class="menu-header">
+            <span class="back-button" onclick="toggleMenu()">←</span>
+        </div>
+        <div class="menu-section">
+            <div class="menu-title">Облачные службы</div>
+            <div class="menu-item">Аккаунт</div>
+        </div>
+        <div class="menu-section">
+            <div class="menu-title">Стиль</div>
+            <div class="menu-item">
+                Размер шрифта
+                <select id="fontSize">
+                    <option value="small">Мелкий</option>
+                    <option value="medium">Средний</option>
+                    <option value="large">Большой</option>
+                    <option value="xlarge">Огромный</option>
+                </select>
+            </div>
+            <div class="menu-item">
+                Сортировка
+                <select id="sortOrder">
+                    <option value="creationDate">Датам создания</option>
+                    <option value="modificationDate">Дата изменения</option>
+                </select>
+            </div>
+        </div>
+        <div class="menu-section theme-section">
+            <div class="menu-item">
+                Темный режим
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
