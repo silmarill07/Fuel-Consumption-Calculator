@@ -2,8 +2,8 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #f7f7f7; /* По умолчанию светлая тема */
+    color: #000000; /* Основной цвет текста */
 }
 
 /* Хедер */
@@ -12,7 +12,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #1f1f1f;
+    background-color: #ffffff; /* Фон хедера для светлой темы */
     position: relative;
 }
 
@@ -25,11 +25,13 @@ body {
 .header .back-button {
     position: absolute;
     left: 10px;
+    color: #000000; /* Цвет стрелки назад */
 }
 
 .header .save-button {
     position: absolute;
     right: 10px;
+    color: #000000; /* Цвет галочки сохранить */
 }
 
 /* Основной контейнер для заметок */
@@ -40,14 +42,31 @@ body {
 #notesContainer {
     max-height: calc(100vh - 60px); /* Оставляем место для хедера */
     overflow-y: auto;
+    cursor: pointer;
 }
 
 .note {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
+    background-color: #ffffff; /* Фон заметок для светлой темы */
+    border: 1px solid #e0e0e0; /* Граница заметок */
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.note-title {
+    font-weight: bold;
+    color: #000000; /* Цвет заголовков заметок */
+}
+
+.note-content {
+    margin-top: 5px;
+    color: #595959; /* Цвет вывода части текста */
+}
+
+.note-date {
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #989898; /* Цвет даты и времени */
 }
 
 /* Кнопка добавления заметки */
@@ -55,8 +74,8 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #ffb21e; /* Фон кнопки добавления */
+    color: #ffffff; /* Цвет плюса */
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -76,7 +95,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #1f1f1f;
+    background-color: #ffffff; /* Фон для окна добавления и просмотра заметок */
     padding: 20px;
     box-sizing: border-box;
     display: flex;
@@ -90,13 +109,10 @@ body {
 .view-note-container textarea {
     margin-top: 10px;
     width: 100%;
-    border: 1px solid #333;
+    border: 1px solid #e0e0e0; /* Граница полей ввода */
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
-    background-color: #2c2c2c;
-    color: #ffffff;
-    font-size: 17px;
 }
 
 .add-note-container textarea,
@@ -105,15 +121,15 @@ body {
     resize: none;
 }
 
+/* Кнопки в окне заметок */
 .popup-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
 }
 
-.popup-buttons button,
-.delete-button {
-    background-color: #007bff;
+.popup-buttons button {
+    background-color: #007bff; /* Фон кнопок в окне добавления и просмотра заметок */
     border: none;
     color: white;
     border-radius: 5px;
@@ -122,8 +138,12 @@ body {
 }
 
 .delete-button {
-    background-color: #dc3545;
+    background-color: #dc3545; /* Фон кнопки удаления */
+    color: #ffffff; /* Цвет шрифта кнопки удаления */
     margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
 }
 
 .delete-button:hover {
@@ -134,20 +154,6 @@ body {
     background-color: #0056b3;
 }
 
-.note-title {
-    font-weight: bold;
-}
-
-.note-content {
-    margin-top: 5px;
-}
-
-.note-date {
-    margin-top: 5px;
-    font-size: 0.8em;
-    color: #888;
-}
-
 /* Меню */
 .menu {
     display: flex;
@@ -155,14 +161,178 @@ body {
 }
 
 .menu-content {
-    display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
-    background-color: #1f1f1f;
-    padding: 10px;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Фон меню для светлой темы */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
 }
 
-.menu.active .menu-content {
-    display: block;
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.menu-section {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    border-bottom: 1px solid #e0e0e0; /* Полоса разделения блоков в меню */
+}
+
+.theme-section {
+    margin-top: auto;
+    border-bottom: none;
+}
+
+.menu-title {
+    font-size: 0.9em;
+    color: #595959; /* Цвет заголовков блоков меню */
+    margin-bottom: 10px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    color: #000000; /* Цвет текста в меню */
+}
+
+/* Переключатель темного режима */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+/* Темная тема */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .header {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode .note {
+    background-color: #1e1e1e;
+    border: 1px solid #333333;
+}
+
+body.dark-mode .note-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .note-content {
+    color: #b0b0b0;
+}
+
+body.dark-mode .note-date {
+    color: #666666;
+}
+
+body.dark-mode .menu-content {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode .menu-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .menu-item {
+    color: #e0e0e0;
+}
+
+body.dark-mode .popup-buttons button {
+    background-color: #333333; /* Фон кнопок в окне добавления и просмотра заметок для темной темы */
+}
+
+body.dark-mode .popup-buttons button:hover {
+    background-color: #555555;
+}
+
+body.dark-mode .add-note-container,
+body.dark-mode .view-note-container {
+    background-color: #1f1f1f; /* Фон окна добавления и просмотра заметок для темной темы */
+}
+
+body.dark-mode .add-note-container input,
+body.dark-mode .add-note-container textarea,
+body.dark-mode .view-note-container input,
+body.dark-mode .view-note-container textarea {
+    background-color: #2c2c2c; /* Фон текстовых полей для темной темы */
+    color: #e0e0e0; /* Цвет текста в текстовых полях для темной темы */
+    border: 1px solid #444444; /* Цвет границы текстовых полей для темной темы */
+}
+
+body.dark-mode .header .back-button,
+body.dark-mode .header .save-button {
+    color: #ffffff; /* Цвет стрелки назад и галочки сохранить */
+    cursor: pointer;
+}
+
+/* Кнопка добавления заметки */
+.add-note-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffb21e; /* Фон кнопки добавления */
+    color: #ffffff; /* Цвет плюса */
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
