@@ -1,82 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note Taking App</title>
+    <title>Топливный калькулятор</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">Заметки</div>
-        <div class="menu">
-            <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        </div>
+    <!-- Хедер -->
+    <header>
+        <h1>Топливный калькулятор</h1>
     </header>
 
-    <div id="mainContainer">
-        <div id="notesContainer"></div>
-        <button class="add-note-btn" onclick="openAddNotePage()">+</button>
-    </div>
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Выбор расчета -->
+        <select id="calculationType" onchange="showCalculation()">
+            <option value="fuelConsumption">Расход топлива на 100 км</option>
+            <option value="tripCost">Стоимость поездки</option>
+            <option value="distance">Пройденное расстояние</option>
+        </select>
 
-    <!-- Add Note Page -->
-    <div id="addNotePage" class="add-note-container" style="display: none;">
-        <header class="header">
-            <div class="back-button" onclick="closeAddNotePage()">←</div>
-            <div class="save-button" onclick="saveNote()">✔</div>
-        </header>
-        <input type="text" id="noteTitle" placeholder="Название заметки">
-        <textarea id="noteContent" placeholder="Содержимое заметки"></textarea>
-    </div>
+        <!-- Расчет расхода топлива на 100 км -->
+        <section id="fuelConsumptionSection">
+            <h2>Расход топлива на 100 км</h2>
+            <input type="number" id="distance1" placeholder="Пройденное расстояние (км)">
+            <input type="number" id="fuelUsed1" placeholder="Потраченный объем топлива (л)">
+            <button onclick="calculateFuelConsumption()">Рассчитать</button>
+            <p id="fuelConsumptionResult"></p>
+        </section>
 
-    <!-- View Note Page -->
-    <div id="viewNotePage" class="view-note-container" style="display: none;">
-        <header class="header">
-            <div class="back-button" onclick="closeViewNotePage()">←</div>
-            <div class="save-button" onclick="updateNote()">✔</div>
-        </header>
-        <input type="text" id="viewNoteTitle" placeholder="Название заметки">
-        <textarea id="viewNoteContent" placeholder="Содержимое заметки"></textarea>
-        <button class="delete-button" onclick="deleteNote()">Удалить</button>
-    </div>
+        <!-- Расчет стоимости поездки -->
+        <section id="tripCostSection" class="hidden">
+            <h2>Стоимость поездки</h2>
+            <input type="number" id="distance2" placeholder="Пройденное расстояние (км)">
+            <input type="number" id="fuelPer100km" placeholder="Расход топлива на 100 км (л)">
+            <input type="number" id="fuelPrice" placeholder="Цена топлива (грн/л)">
+            <button onclick="calculateTripCost()">Рассчитать</button>
+            <p id="tripCostResult"></p>
+        </section>
 
-    <!-- Menu -->
-    <div id="menu" class="menu-content" style="display: none;">
-        <div class="menu-header">
-            <span class="back-button" onclick="toggleMenu()">←</span>
-        </div>
-        <div class="menu-section">
-            <div class="menu-title">Облачные службы</div>
-            <div class="menu-item">Аккаунт</div>
-        </div>
-        <div class="menu-section">
-            <div class="menu-title">Стиль</div>
-            <div class="menu-item">
-                Размер шрифта
-                <select id="fontSize">
-                    <option value="small">Мелкий</option>
-                    <option value="medium">Средний</option>
-                    <option value="large">Большой</option>
-                    <option value="xlarge">Огромный</option>
-                </select>
-            </div>
-            <div class="menu-item">
-                Сортировка
-                <select id="sortOrder">
-                    <option value="creationDate">Датам создания</option>
-                    <option value="modificationDate">Дата изменения</option>
-                </select>
-            </div>
-        </div>
-        <div class="menu-section theme-section">
-            <div class="menu-item">
-                Темный режим
-                <label class="switch">
-                    <input type="checkbox" id="themeToggle">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-        </div>
+        <!-- Расчет пройденного расстояния по количеству топлива -->
+        <section id="distanceSection" class="hidden">
+            <h2>Пройденное расстояние</h2>
+            <input type="number" id="availableFuel" placeholder="Доступный объем топлива (л)">
+            <input type="number" id="fuelPer100km2" placeholder="Расход топлива на 100 км (л)">
+            <button onclick="calculateDistance()">Рассчитать</button>
+            <p id="distanceResult"></p>
+        </section>
     </div>
 
     <script src="script.js"></script>
