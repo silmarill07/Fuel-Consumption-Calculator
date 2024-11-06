@@ -5,12 +5,32 @@ function showCalculation() {
     document.getElementById("tripCostSection").classList.add("hidden");
     document.getElementById("distanceSection").classList.add("hidden");
 
+    // Показать раздел в зависимости от выбранного значения
     if (calculationType === "fuelConsumption") {
         document.getElementById("fuelConsumptionSection").classList.remove("hidden");
     } else if (calculationType === "tripCost") {
         document.getElementById("tripCostSection").classList.remove("hidden");
     } else if (calculationType === "distance") {
         document.getElementById("distanceSection").classList.remove("hidden");
+    }
+}
+
+// Установить расчет стоимости поездки как начальный выбор
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("calculationType").value = "tripCost";
+    showCalculation();
+});
+
+// Расчет стоимости поездки
+function calculateTripCost() {
+    const distance = parseFloat(document.getElementById("distance2").value);
+    const fuelPer100km = parseFloat(document.getElementById("fuelPer100km").value);
+    const fuelPrice = parseFloat(document.getElementById("fuelPrice").value);
+    if (distance > 0 && fuelPer100km > 0 && fuelPrice > 0) {
+        const tripCost = (distance / 100) * fuelPer100km * fuelPrice;
+        document.getElementById("tripCostResult").innerText = `Стоимость поездки: ${tripCost.toFixed(2)} грн`;
+    } else {
+        document.getElementById("tripCostResult").innerText = "Введите корректные данные";
     }
 }
 
@@ -26,19 +46,6 @@ function calculateFuelConsumption() {
     }
 }
 
-// Расчет стоимости поездки
-function calculateTripCost() {
-    const distance = parseFloat(document.getElementById("distance2").value);
-    const fuelPer100km = parseFloat(document.getElementById("fuelPer100km").value);
-    const fuelPrice = parseFloat(document.getElementById("fuelPrice").value);
-    if (distance > 0 && fuelPer100km > 0 && fuelPrice > 0) {
-        const tripCost = (distance / 100) * fuelPer100km * fuelPrice;
-        document.getElementById("tripCostResult").innerText = `Стоимость поездки: ${tripCost.toFixed(2)} грн`;
-    } else {
-        document.getElementById("tripCostResult").innerText = "Введите корректные данные";
-    }
-}
-
 // Расчет пройденного расстояния по количеству топлива
 function calculateDistance() {
     const availableFuel = parseFloat(document.getElementById("availableFuel").value);
@@ -50,6 +57,3 @@ function calculateDistance() {
         document.getElementById("distanceResult").innerText = "Введите корректные данные";
     }
 }
-
-// Инициализация отображения по умолчанию
-showCalculation();
