@@ -11,7 +11,6 @@
     <header>
         <h1>Топливный калькулятор</h1>
     </header>
-
     <!-- Основной контейнер -->
     <div class="container">
         <!-- Выбор расчета -->
@@ -20,16 +19,6 @@
             <option value="tripCost">Стоимость поездки</option>
             <option value="distance">Пройденное расстояние</option>
         </select>
-
-        <!-- Расчет расхода топлива на 100 км -->
-        <section id="fuelConsumptionSection">
-            <h2>Расход топлива на 100 км</h2>
-            <input type="number" id="distance1" placeholder="Пройденное расстояние (км)">
-            <input type="number" id="fuelUsed1" placeholder="Потраченный объем топлива (л)">
-            <button onclick="calculateFuelConsumption()">Рассчитать</button>
-            <p id="fuelConsumptionResult"></p>
-        </section>
-
         <!-- Расчет стоимости поездки -->
         <section id="tripCostSection" class="hidden">
             <h2>Стоимость поездки</h2>
@@ -39,7 +28,14 @@
             <button onclick="calculateTripCost()">Рассчитать</button>
             <p id="tripCostResult"></p>
         </section>
-
+        <!-- Расчет расхода топлива на 100 км -->
+        <section id="fuelConsumptionSection">
+            <h2>Расход топлива на 100 км</h2>
+            <input type="number" id="distance1" placeholder="Пройденное расстояние (км)">
+            <input type="number" id="fuelUsed1" placeholder="Потраченный объем топлива (л)">
+            <button onclick="calculateFuelConsumption()">Рассчитать</button>
+            <p id="fuelConsumptionResult"></p>
+        </section>
         <!-- Расчет пройденного расстояния по количеству топлива -->
         <section id="distanceSection" class="hidden">
             <h2>Пройденное расстояние</h2>
@@ -49,7 +45,6 @@
             <p id="distanceResult"></p>
         </section>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
