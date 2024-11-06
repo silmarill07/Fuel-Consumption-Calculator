@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Топливный калькулятор</title>
+    <title>Паливний калькулятор</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Хедер -->
     <header>
-        <h1>Топливный калькулятор</h1>
+        <h1>Паливний калькулятор</h1>
     </header>
     <!-- Основной контейнер -->
     <div class="container">
         <!-- Выбор расчета -->
         <select id="calculationType" onchange="showCalculation()">
-            <option value="tripCost">Стоимость поездки</option>
-            <option value="distance">Пройденное расстояние</option>
-            <option value="fuelConsumption">Расход топлива на 100 км</option>
+            <option value="tripCost">Вартість поїздки</option>
+            <option value="distance">Пройдена відстань</option>
+            <option value="fuelConsumption">Витрата палива на 100 км</option>
         </select>
         <!-- Расчет стоимости поездки -->
         <section id="tripCostSection" class="hidden">
-            <h2>Стоимость поездки</h2>
-            <input type="number" id="distance2" placeholder="Пройденное расстояние (км)">
-            <input type="number" id="fuelPer100km" placeholder="Расход топлива на 100 км (л)">
-            <input type="number" id="fuelPrice" placeholder="Цена топлива (грн/л)">
-            <button onclick="calculateTripCost()">Рассчитать</button>
+            <h2>Вартість поїздки</h2>
+            <input type="number" id="distance2" placeholder="Пройдена відстань (км)">
+            <input type="number" id="fuelPer100km" placeholder="Витрата палива на 100 км (л)">
+            <input type="number" id="fuelPrice" placeholder="Ціна пального (грн/л)">
+            <button onclick="calculateTripCost()">Розрахувати</button>
             <p id="tripCostResult"></p>
         </section>
         <!-- Расчет расхода топлива на 100 км -->
         <section id="fuelConsumptionSection">
-            <h2>Расход топлива на 100 км</h2>
-            <input type="number" id="distance1" placeholder="Пройденное расстояние (км)">
-            <input type="number" id="fuelUsed1" placeholder="Потраченный объем топлива (л)">
-            <button onclick="calculateFuelConsumption()">Рассчитать</button>
+            <h2>Витрата палива на 100 км</h2>
+            <input type="number" id="distance1" placeholder="Пройдена відстань (км)">
+            <input type="number" id="fuelUsed1" placeholder="Витрачений обсяг палива (л)">
+            <button onclick="calculateFuelConsumption()">Розрахувати</button>
             <p id="fuelConsumptionResult"></p>
         </section>
         <!-- Расчет пройденного расстояния по количеству топлива -->
         <section id="distanceSection" class="hidden">
             <h2>Пройденное расстояние</h2>
-            <input type="number" id="availableFuel" placeholder="Доступный объем топлива (л)">
-            <input type="number" id="fuelPer100km2" placeholder="Расход топлива на 100 км (л)">
-            <button onclick="calculateDistance()">Рассчитать</button>
+            <input type="number" id="availableFuel" placeholder="Доступний обсяг палива (л)">
+            <input type="number" id="fuelPer100km2" placeholder="Витрата палива на 100 км (л)">
+            <button onclick="calculateDistance()">Розрахувати</button>
             <p id="distanceResult"></p>
         </section>
     </div>
