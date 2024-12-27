@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Облік витрат</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Меню -->
+        <div class="menu-overlay"></div>
+        <div class="side-menu">
+            <div class="menu-header">Меню</div>
+            <div class="menu-item" id="createBackup">
+                <i class="fas fa-download"></i> Створити бекап
+            </div>
+            <div class="menu-item" id="importBackup">
+                <i class="fas fa-upload"></i> Імпортувати бекап
+                <input type="file" id="fileInput" accept=".xlsx" style="display: none;">
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <header>
+            <button class="menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>Облік витрат</h1>
+        </header>
+
+        <div class="date-selector">
+            <select id="monthSelect"></select>
+            <select id="yearSelect"></select>
+        </div>
+
+        <div class="content">
+            <div id="expensesList" class="expenses-list"></div>
+        </div>
+
+        <div class="bottom-panel">
+            <div class="total-amount">
+                Загалом: <span id="totalAmount">0</span> грн
+            </div>
+            <button class="add-button" id="addExpense">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <!-- Модальное окно добавления расхода -->
+        <div class="modal" id="expenseModal">
+            <div class="modal-content">
+                <h2>Нова витрата</h2>
+                <input type="text" id="expenseName" placeholder="Название" required>
+                <input type="number" id="expenseAmount" placeholder="Сумма" required>
+                <div class="modal-buttons">
+                    <button class="cancel-button">Скасувати</button>
+                    <button class="save-button">Зберегти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
