@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Драм-машина</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Простая драм-машина для создания ритмов">
+    <meta name="theme-color" content="#313447">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <input id="tempoInput" 
+                   type="number" 
+                   value="90" 
+                   min="40" 
+                   max="240" 
+                   step="1"
+                   onkeydown="return event.keyCode !== 69"> <span class="bpm">BPM</span>
+            <select id="patternSelect">
+                <option value="popRock1">Поп/Рок 1</option>
+                <option value="popRock2">Поп/Рок 2</option>
+                <option value="popRock3">Поп/Рок 3</option>
+                <option value="popRock4">Поп/Рок 4</option>
+                <option value="popRock5">Поп/Рок 5</option>
+                <option value="popRock6">Поп/Рок 6</option>
+                <option value="metronom1">Метроном 1</option>
+                <option value="metronom2">Метроном 2</option>
+            </select>
+            <div class="volume-control">
+                <label for="volumeControl" class="volume-label">Громкость:</label>
+                <input type="range" id="volumeControl" min="0" max="100" value="70">
+                <span id="volumeValue">70%</span>
+            </div>
+        </div>
+        <div id="grid" class="grid"></div>
+        <div class="btns">
+            <button id="playBtn">Play</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+    </div>
+    <script>
+        // Регистрация Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+
+            // Отслеживание состояния подключения
+            window.addEventListener('online', function() {
+                document.getElementById('offlineMessage').style.display = 'none';
+            });
+
+            window.addEventListener('offline', function() {
+                document.getElementById('offlineMessage').style.display = 'block';
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
