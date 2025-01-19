@@ -36,3 +36,35 @@ function image_loaded() {
         }, 1000);
     }
 }
+
+$(document).ready(function() {
+    // Initialize Magnific Popup
+    $('.gallery').magnificPopup({
+        delegate: 'a.portfolio-details',
+        type: 'image',
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0,1]
+        },
+        callbacks: {
+            elementParse: function(item) {
+                // Get the image source from the thumbnail
+                var thumbnailSrc = item.el.closest('.single_portfolio').find('img').attr('src');
+                // Use the same path but ensure it matches the case
+                item.src = thumbnailSrc;
+            }
+        }
+    });
+
+    // Optional: Add loading animation
+    $(document).on('click', 'a.portfolio-details', function(e) {
+        var loadingText = $('<div class="loading-indicator">Loading...</div>');
+        $(this).append(loadingText);
+        
+        // Remove loading text after image loads or fails
+        $(this).on('mfpOpen', function() {
+            loadingText.remove();
+        });
+    });
+});
