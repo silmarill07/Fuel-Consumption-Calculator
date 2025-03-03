@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-theme">
+    <!-- Основной экран -->
+    <div class="app-container" id="mainScreen">
+        <header class="app-header">
+            <h1 data-translate="notes">Заметки</h1>
+            <div class="header-actions">
+                <button id="searchButton" class="icon-button" title="Поиск">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="selectNotesButton" class="icon-button" style="display: none;">
+                    <i class="fas fa-check-square"></i>
+                </button>
+                <button id="syncButton" class="icon-button" title="Синхронизировать с GitHub">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button id="settingsButton" class="icon-button" title="Настройки">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Строка поиска -->
+        <div class="search-bar">
+            <div class="search-input-container">
+                <input type="text" id="searchInput" data-translate="searchPlaceholder" placeholder="Поиск заметок...">
+                <div class="search-actions">
+                    <button id="cancelSearch" data-translate="cancel">Отмена</button>
+                    <button id="submitSearch" data-translate="search">Поиск</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель выбора заметок -->
+        <div class="selection-header" style="display: none;">
+            <button id="cancelSelection" class="icon-button">
+                <i class="fas fa-times"></i>
+            </button>
+            <span id="selectedCount" data-translate="selected">Выбрано: 0</span>
+            <button id="selectAll" class="icon-button">
+                <i class="fas fa-check-double"></i>
+            </button>
+            <button id="deleteSelected" class="icon-button">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+
+        <div class="notes-container">
+            <div id="notesList" class="notes-list">
+                <!-- Notes will be added here dynamically -->
+            </div>
+        </div>
+
+        <button id="addNoteButton" class="floating-button">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <!-- Экран настроек -->
+    <div class="screen settings-screen" id="settingsScreen">
+        <header class="app-header">
+            <button class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1 data-translate="settings">Настройки</h1>
+        </header>
+
+        <div class="settings-content">
+            <div class="settings-section github-section">
+                <h3 data-translate="githubSync">GitHub Синхронизация</h3>
+                <div class="github-connection-status">
+                    <div class="github-user-info">
+                        <div id="githubStatus" data-translate="githubDisconnected">Не подключено</div>
+                        <div class="github-avatar"></div>
+                        <div class="github-user-details">
+                            <div class="github-username"></div>
+                        </div>
+                    </div>
+                    <button id="githubDisconnect" class="github-disconnect-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="disconnect">Выйти</span>
+                    </button>
+                </div>
+                <div class="github-form">
+                    <input type="text" id="githubUsername" data-translate="githubUsername" placeholder="Имя пользователя">
+                    <input type="text" id="githubRepo" data-translate="githubRepo" placeholder="Репозиторий">
+                    <input type="password" id="githubToken" data-translate="githubToken" placeholder="Токен доступа">
+                    <button id="githubConnect" data-translate="connect">Подключить</button>
+                </div>
+            </div>
+            
+            <div class="settings-section sort-section">
+                <h3 data-translate="sortNotes">Сортировка заметок</h3>
+                <div class="sort-options">
+                    <select id="sortType">
+                        <option value="created" data-translate="sortByCreated">По дате создания</option>
+                        <option value="updated" data-translate="sortByUpdated">По дате редактирования</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section language-section">
+                <h3 data-translate="language">Язык</h3>
+                <div class="language-options">
+                    <select id="language">
+                        <option value="ru">Русский</option>
+                        <option value="uk">Українська</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-section theme-section">
+                <h3 data-translate="theme">Тема</h3>
+                <div class="theme-toggle">
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <label for="themeToggle">
+                            <span class="toggle-track"></span>
+                            <span class="toggle-thumb"></span>
+                        </label>
+                    </div>
+                    <span class="toggle-label" data-translate="darkTheme">Тёмная тема</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран редактирования заметки -->
+    <div class="screen note-edit-screen" id="noteEditScreen">
+        <header class="app-header">
+            <div class="header-left">
+                <button class="back-button">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="header-right">
+                <button id="saveNoteButton" data-translate="save">Сохранить</button>
+            </div>
+        </header>
+
+        <div class="note-edit-content">
+            <input type="text" id="noteTitle" data-translate="noteTitle" placeholder="Заголовок заметки">
+            <div id="noteContent" contenteditable="true" data-translate="noteContent" placeholder="Текст заметки"></div>
+            <div class="formatting-toolbar">
+                <button id="boldButton" class="format-button" title="Жирный">
+                    <i class="fas fa-bold"></i>
+                </button>
+                <div class="format-divider"></div>
+                <button id="increaseTextButton" class="format-button" title="Увеличить текст">
+                    <span class="text-size-icon">A<sup>+</sup></span>
+                </button>
+                <button id="decreaseTextButton" class="format-button" title="Уменьшить текст">
+                    <span class="text-size-icon">A<sup>-</sup></span>
+                </button>
+                <div class="format-divider"></div>
+                <button id="imageButton" class="format-button" title="Добавить изображение">
+                    <i class="fas fa-image"></i>
+                </button>
+                <input type="file" id="imageInput" accept="image/*" style="display: none">
+            </div>
+        </div>
+
+        <button id="deleteNoteButton" class="delete-note-button" style="display: none;" data-translate="deleteNote">
+            Удалить заметку
+        </button>
+    </div>
+
+    <!-- Модальное окно подтверждения -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3 data-translate="confirm">Подтверждение</h3>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button id="confirmYes" data-translate="yes">Да</button>
+                <button id="confirmNo" data-translate="no">Нет</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
