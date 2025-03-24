@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Downloader</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text">Завантаження файлів...</div>
+    </div>
+    
+    <header class="header"><div class="logo">BulkDownloader</div></header>
+    
+    <div class="container">
+        <h1>Масова завантаження файлів (Максимум 100 посилань за раз)</h1>
+        
+        <div class="input-container">
+            <textarea id="links-input" placeholder="Вставте посилання сюди. Кожне посилання має починатися з https:// або http://"></textarea>
+            
+            <div class="buttons">
+                <button id="parse-btn" class="btn btn-outline">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    Аналізувати
+                </button>
+                
+                <button id="download-btn" class="btn btn-primary" disabled>
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Завантажити файли
+                </button>
+            </div>
+        </div>
+        <div class="notification-body"><span>Обов'язково дай дозвіл браузеру для скачування множинних посилань! 😉</span></div>
+        <div id="links-list" class="links-list">
+            <h2>Знайдені посилання (<span id="links-count">0</span>)</h2>
+            <div id="links-container" class="links-container"></div>
+        </div>
+    </div>
+    
+    <footer>
+        Розроблено спеціально для Гало4ка &copy; 2025
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
