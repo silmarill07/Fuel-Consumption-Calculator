@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔧 Linux KB — База ошибок</title>
+  <meta name="description" content="Решения для ошибок Linux: Arch, Debian, Fedora" />
+  <meta name="theme-color" content="#3182ce" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔧 Linux Knowledge Base</h1>
+      <p>Решения для ошибок Arch, Debian, Fedora и других дистрибутивов</p>
+    </header>
+
+    <section class="search-section">
+      <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Поиск по ошибкам..." autocomplete="off" />
+      </div>
+      <ul id="suggestions" class="suggestions"></ul>
+    </section>
+
+    <main id="knowledgeContainer">
+      <!-- Карточки загрузятся через JS -->
+    </main>
+
+    <div id="pagination" class="pagination">
+      <!-- Страницы добавятся через JS -->
+    </div>
+
+    <footer>
+      <p>© 2025 Linux KB.</p>
+    </footer>
+  </div>
+
+  <!-- Кнопка "Наверх" -->
+  <button id="scrollToTop" class="scroll-top-btn" title="Наверх">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div id="toast" class="toast">✅ Скопировано!</div>
+
+  <!-- Сначала загружаем записи -->
+  <script src="knowledge.js"></script>
+  <!-- Потом основная логика -->
+  <script src="script.js"></script>
+</body>
+</html>

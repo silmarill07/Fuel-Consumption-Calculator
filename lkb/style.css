@@ -1,0 +1,452 @@
+:root {
+  --primary: #2d3748;
+  --accent: #3182ce;
+  --accent-hover: #2c75bb;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text: #2d3748;
+  --border: #e2e8f0;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --transition: all 0.25s ease;
+  --font-main: 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  position: relative;
+  transition: padding-top 0.3s ease;
+}
+
+.container.sticky-active {
+  padding-top: 80px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #3182ce, #2c5282);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+header p {
+  color: #4a5568;
+  font-size: 1.1rem;
+}
+
+/* Поисковая панель */
+.search-section {
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.search-box:focus-within {
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
+.search-icon {
+  color: #718096;
+  padding: 14px;
+  font-size: 1.1rem;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+#searchInput::placeholder {
+  color: #a0aec0;
+}
+
+/* Подсказки автодополнения */
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  max-height: 240px;
+  overflow-y: auto;
+  list-style: none;
+  z-index: 10;
+  box-shadow: var(--shadow);
+  display: none;
+}
+
+.suggestions.active {
+  display: block;
+}
+
+.suggestions li {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+
+.suggestions li:hover {
+  background-color: #ebf8ff;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* === Прилипающий поиск === */
+.sticky-search {
+  position: fixed;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s forwards;
+  border-radius: 0;
+  padding: 12px 16px;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Карточки — во всю ширину блока */
+.kb-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.kb-card h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.8rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.kb-card h2 i {
+  color: var(--accent);
+}
+
+.kb-card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.kb-card .tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 5px 10px;
+  background: #ebf8ff;
+  color: var(--accent);
+  border-radius: 6px;
+  border: 1px solid #bee3f8;
+}
+
+.kb-card p {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #4a5568;
+}
+
+.kb-card pre {
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  position: relative;
+}
+
+.kb-card pre code {
+  font-family: var(--font-mono);
+  white-space: pre;
+  word-wrap: break-word;
+  color: #2d3748;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.copy-btn:hover {
+  background: var(--accent);
+}
+
+pre:hover .copy-btn {
+  opacity: 1;
+}
+
+/* Пагинация */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.page-btn:hover,
+.page-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.page-btn.prev-btn,
+.page-btn.next-btn {
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--primary);
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.page-btn.prev-btn:hover,
+.page-btn.next-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #38a169;
+  color: white;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  font-weight: 500;
+}
+
+#toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Футер */
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  color: #718096;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+footer code {
+  background: var(--border);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Нет результатов */
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+  font-style: italic;
+}
+
+/* === Кнопка "Наверх" === */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 99;
+}
+
+.scroll-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.1);
+}
+
+/* === Медиазапросы === */
+@media (max-width: 768px) {
+  .sticky-search {
+    left: 12px;
+    right: 12px;
+    padding: 10px 12px;
+    border-radius: 0;
+  }
+
+  .sticky-search .search-box {
+    padding: 0;
+  }
+
+  .sticky-search .search-icon {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .sticky-search #searchInput {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .kb-card {
+    padding: 1.2rem;
+  }
+
+  .page-btn.prev-btn,
+  .page-btn.next-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .page-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+
+  .scroll-top-btn {
+    width: 40px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-btn.prev-btn,
+  .page-btn.next-btn {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .page-btn {
+    padding: 5px 6px;
+    font-size: 0.75rem;
+  }
+}
