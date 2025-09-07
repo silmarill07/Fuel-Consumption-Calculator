@@ -151,7 +151,7 @@ body.dark-theme .theme-toggle {
     box-shadow: 0 10px 30px var(--shadow-light);
     position: relative;
     z-index: 10;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
 }
 
 body.dark-theme .audio-player {
