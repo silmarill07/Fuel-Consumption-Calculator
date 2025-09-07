@@ -439,11 +439,7 @@ body.dark-theme ::-webkit-scrollbar-thumb {
     
     .player-header {
         flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .speed-control {
-        align-self: flex-end;
+        align-items: center;
     }
     
     /* Мобильная панель скорости */
