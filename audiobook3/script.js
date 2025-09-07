@@ -163,7 +163,7 @@ class AudioBookPlayer {
                     <div class="controls">
                         <button class="control-btn" id="rewindBack" title="Назад на 10 сек">
                             <i class="fas fa-backward"></i>
-                            <span class="rewind-text">10s</span>
+                            <span class="rewind-text">10с</span>
                         </button>
                         <button class="control-btn" id="prevBtn" title="Предыдущая глава">
                             <i class="fas fa-step-backward"></i>
@@ -175,7 +175,7 @@ class AudioBookPlayer {
                             <i class="fas fa-step-forward"></i>
                         </button>
                         <button class="control-btn" id="rewindForward" title="Вперед на 10 сек">
-                            <span class="rewind-text">10s</span>
+                            <span class="rewind-text">10с</span>
                             <i class="fas fa-forward"></i>
                         </button>
                     </div>
