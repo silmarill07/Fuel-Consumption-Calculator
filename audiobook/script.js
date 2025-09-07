@@ -83,7 +83,7 @@ class AudioBookPlayer {
             // Одна книга
             this.book = {
                 id: "audiobook",
-                title: "Круз Андрей, Круз Мария - Странники",
+                title: "Андрей Круз, Мария Круз - Странники",
                 cover: "img/Странники.jpeg",
                 audioFiles: [
                     { title: "Глава 1", file: "audio/001.mp3" },
@@ -257,26 +257,6 @@ class AudioBookPlayer {
             startTime = parseFloat(savedTime);
         }
         
-        // Устанавливаем скорость воспроизведения из сохраненных данных
-        if (savedSpeed !== null) {
-            const speedValue = parseFloat(savedSpeed);
-            if (speedValue >= 0.1 && speedValue <= 3) {
-                this.audio.playbackRate = speedValue;
-                if (document.getElementById('speedInput')) {
-                    document.getElementById('speedInput').value = speedValue.toFixed(2);
-                }
-            }
-        } else {
-            // Если нет сохраненной скорости, берем из input
-            const speedInput = document.getElementById('speedInput');
-            if (speedInput) {
-                const speedValue = parseFloat(speedInput.value) || 1.0;
-                if (speedValue >= 0.1 && speedValue <= 3) {
-                    this.audio.playbackRate = speedValue;
-                }
-            }
-        }
-        
         this.currentChapterIndex = chapterIndex;
         
         // Загружаем главу
@@ -286,6 +266,29 @@ class AudioBookPlayer {
         
         // Устанавливаем время воспроизведения
         this.audio.currentTime = startTime;
+        
+        // Устанавливаем скорость воспроизведения
+        if (savedSpeed !== null) {
+            // Используем сохраненную скорость
+            const speedValue = parseFloat(savedSpeed);
+            if (speedValue >= 0.1 && speedValue <= 3) {
+                this.audio.playbackRate = speedValue;
+                if (document.getElementById('speedInput')) {
+                    document.getElementById('speedInput').value = speedValue.toFixed(2);
+                }
+            }
+        } else {
+            // Используем значение из input поля (если оно отличается от значения по умолчанию)
+            setTimeout(() => {
+                const speedInput = document.getElementById('speedInput');
+                if (speedInput) {
+                    const inputValue = parseFloat(speedInput.value);
+                    if (!isNaN(inputValue) && inputValue !== 1.0 && inputValue >= 0.1 && inputValue <= 3) {
+                        this.audio.playbackRate = inputValue;
+                    }
+                }
+            }, 100);
+        }
         
         // Обновляем UI
         document.querySelectorAll('.playlist-item').forEach((item, i) => {
@@ -306,10 +309,16 @@ class AudioBookPlayer {
         this.currentChapterIndex = index;
         const chapter = this.book.chapters[index];
         
+        // Сохраняем текущую скорость перед загрузкой новой главы
+        const currentSpeed = this.audio.playbackRate;
+        
         // Загружаем новую главу
         this.audio.src = chapter.file;
         this.audio.load();
         this.audio.currentTime = 0; // Начинаем с начала новой главы
+        
+        // Восстанавливаем скорость после загрузки новой главы
+        this.audio.playbackRate = currentSpeed;
         
         // Обновляем UI
         document.querySelectorAll('.playlist-item').forEach((item, i) => {
