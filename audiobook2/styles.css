@@ -324,11 +324,11 @@ body.dark-theme .playlist-header {
 }
 
 .playlist-item:hover {
-    background-color: rgba(67, 97, 238, 0.1);
+    background-color: rgba(67, 97, 238, 0.3);
 }
 
 .playlist-item.active {
-    background-color: rgba(67, 97, 238, 0.2);
+    background-color: rgba(67, 97, 238, 0.8);
 }
 
 .playlist-item-number {
