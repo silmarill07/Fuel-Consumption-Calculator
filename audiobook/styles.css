@@ -145,7 +145,7 @@ body.dark-theme .theme-toggle {
 
 .audio-player {
     flex: 2;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.3);
     border-radius: 15px;
     padding: 25px;
     box-shadow: 0 10px 30px var(--shadow-light);
@@ -155,7 +155,7 @@ body.dark-theme .theme-toggle {
 }
 
 body.dark-theme .audio-player {
-    background-color: rgba(30, 30, 30, 0.9);
+    background-color: rgba(30, 30, 30, 0.3);
     box-shadow: 0 10px 30px var(--shadow-dark);
 }
 
